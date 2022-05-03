@@ -1,24 +1,24 @@
 import useTableData from './useTableData';
 import { Grid } from '@mui/material';
+
 import SmallScreenTable from './SmallScreenTable';
 import BigScreenTable from './BigScreenTable';
 import ErrorMessage from 'components/ErrorMessage';
-import { useIsScreenSizeDown } from 'hooks/ScreenSize';
+import LoadingIndicator from 'components/LoadingIndicator';
 
+import { useIsScreenSizeDown } from 'hooks/useScreenSize';
 import { FilterData } from 'helpers/types';
 
 type Props = {
   readonly filter: FilterData;
 };
 
-// TODO: change color when Temperature table is shown to red
-
 const TableView = ({ filter }: Props) => {
   const { data, addData, isError, isLoading } = useTableData(filter);
   const isSmallScreen = useIsScreenSizeDown('sm');
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <LoadingIndicator />;
   }
 
   if (isError) {
