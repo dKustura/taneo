@@ -3,7 +3,7 @@ import { useQuery } from 'react-query';
 import { getQueryKey } from './queryKeys';
 import { AnnualAverageData, MonthlyAverageData } from './models';
 import { ClimateVariable, CountryCode, Measure } from 'helpers/types';
-import { QueryOptions } from './queryOptions';
+import { DefaultQueryOptions } from './queryOptions';
 
 axios.defaults.baseURL = 'https://taneo-climate-api.herokuapp.com/v1/country';
 
@@ -40,7 +40,7 @@ export const useMonthlyAverageDataQuery = (
   return useQuery(
     getQueryKey(Measure.MonthlyAverage, variable, countryCode, startYear, endYear),
     () => getMonthlyAverageData(variable, countryCode, startYear, endYear),
-    QueryOptions.FETCH_ONCE
+    DefaultQueryOptions
   );
 };
 
@@ -53,6 +53,6 @@ export const useAnnualAverageDataQuery = (
   return useQuery(
     getQueryKey(Measure.AnnualAverage, variable, countryCode, startYear, endYear),
     () => getAnnualAverageData(variable, countryCode, startYear, endYear),
-    QueryOptions.FETCH_ONCE
+    DefaultQueryOptions
   );
 };

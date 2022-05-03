@@ -64,7 +64,7 @@ export const COUNTRIES: Country[] = [
   },
   {
     name: 'Macedonia',
-    code: CountryCode.Montenegro,
+    code: CountryCode.Macedonia,
   },
   {
     name: 'Yugoslavia',
@@ -79,3 +79,31 @@ export const COUNTRIES: Country[] = [
     ],
   },
 ];
+
+export const MONTHS = [
+  'Jan',
+  'Feb',
+  'Mar',
+  'Apr',
+  'May',
+  'Jun',
+  'Jul',
+  'Aug',
+  'Sep',
+  'Oct',
+  'Nov',
+  'Dec',
+];
+
+export const GCM_DISPLAY_NAMES: { [gcm: string]: string } = {
+  'access1-0': 'ACCESSS1.0',
+  'bnu-esm': 'BNU-ESMU-ESM',
+  canesm2: 'CANESM2',
+  'csiro-mk3-6-0': 'CSIRO-MK3.6.0',
+  'gfdl-cm3': 'GFDL-CM3',
+  'hadgem2-ao': 'HADGEM-AO',
+  'ipsl-cm5a-mr': 'IPSL-CM5A-MR',
+  miroc5: 'MIROC5',
+  'mri-cgcm3': 'MRI-CGCM3',
+  'noresm1-m': 'NORESM1-M',
+};

@@ -7,8 +7,8 @@ import HamburgerMenu from './HamburgerMenu';
 
 const Header = () => {
   return (
-    <header>
-      <AppBar position="sticky">
+    <>
+      <AppBar position="sticky" enableColorOnDark={false}>
         <Container maxWidth="xl">
           <Toolbar>
             <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -31,7 +31,7 @@ const Header = () => {
           </Toolbar>
         </Container>
       </AppBar>
-    </header>
+    </>
   );
 };
 

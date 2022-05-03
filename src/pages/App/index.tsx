@@ -5,8 +5,8 @@ import { ThemeProvider } from '@mui/material/styles';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import Table from 'pages/Table';
-import Chart from 'pages/Chart';
+import TableView from 'pages/TableView';
+import ChartView from 'pages/ChartView';
 import NotFound from 'pages/NotFound';
 
 import { getTheme } from 'components/Theme';
@@ -34,8 +34,8 @@ function App() {
           <Filter data={filterData} onChangeHandlers={onChangeHandlers} />
 
           <Routes>
-            <Route path={RoutePaths.TABLE} element={<Table filter={filterData} />} />
-            <Route path={RoutePaths.CHART} element={<Chart />} />
+            <Route path={RoutePaths.TABLE} element={<TableView filter={filterData} />} />
+            <Route path={RoutePaths.CHART} element={<ChartView />} />
 
             <Route path="/" element={<Navigate to={RoutePaths.TABLE} />} />
             <Route path="*" element={<NotFound />} />

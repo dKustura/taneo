@@ -30,8 +30,8 @@ const commonTheme: ThemeOptions = {
     values: {
       xs: 0,
       sm: 600,
-      md: 900,
-      lg: 1200,
+      md: 1000,
+      lg: 1300,
       xl: 1900,
     },
   },
@@ -99,7 +99,7 @@ export const lightTheme = responsiveFontSizes(
         main: colors.blue400,
       },
       secondary: {
-        main: colors.teal400,
+        main: '#ffd740',
       },
       ...commonPalette,
     },
@@ -115,10 +115,10 @@ export const darkTheme = responsiveFontSizes(
     palette: {
       mode: ThemeMode.Dark,
       background: {
-        default: colors.black,
+        default: '#212121',
       },
       primary: {
-        main: colors.blue200,
+        main: '#80cbc4',
       },
       secondary: {
         main: colors.teal500,
