@@ -1,8 +1,8 @@
 import useTableData from './useTableData';
 import { Grid } from '@mui/material';
 
-import SmallScreenTable from './SmallScreenTable';
-import BigScreenTable from './BigScreenTable';
+import SmallScreenTable from './tables/SmallScreenTable';
+import BigScreenTable from './tables/BigScreenTable';
 import ErrorMessage from 'components/ErrorMessage';
 import LoadingIndicator from 'components/LoadingIndicator';
 
@@ -15,7 +15,7 @@ type Props = {
 
 const TableView = ({ filter }: Props) => {
   const { data, addData, isError, isLoading } = useTableData(filter);
-  const isSmallScreen = useIsScreenSizeDown('sm');
+  const isSmallScreen = useIsScreenSizeDown('md');
 
   if (isLoading) {
     return <LoadingIndicator />;

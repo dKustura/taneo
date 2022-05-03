@@ -14,7 +14,7 @@ import { MonthlyAverageData } from 'api/models';
 
 import { MONTHS } from 'helpers/constants';
 import { ClimateVariable } from 'helpers/types';
-import { getGCMDisplayName } from 'helpers/dataDisplay';
+import { getDisplayNameForGCM } from 'helpers/dataDisplay';
 import globalStyles from 'globalStyles';
 
 type Props = {
@@ -49,9 +49,11 @@ const BigScreenTable = ({ data, climateVariable }: Props) => {
 
         <TableBody>
           {data.map((gcmData) => (
-            <TableRow key={gcmData.gcm}>
+            <TableRow key={gcmData.gcm} hover>
               <TableCell>
-                <Typography sx={globalStyles.boldText}>{getGCMDisplayName(gcmData.gcm)}</Typography>
+                <Typography sx={globalStyles.boldText}>
+                  {getDisplayNameForGCM(gcmData.gcm)}
+                </Typography>
               </TableCell>
 
               {gcmData.monthVals.map((monthValue, index) => (

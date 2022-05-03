@@ -35,7 +35,7 @@ function App() {
 
           <Routes>
             <Route path={RoutePaths.TABLE} element={<TableView filter={filterData} />} />
-            <Route path={RoutePaths.CHART} element={<ChartView />} />
+            <Route path={RoutePaths.CHART} element={<ChartView filter={filterData} />} />
 
             <Route path="/" element={<Navigate to={RoutePaths.TABLE} />} />
             <Route path="*" element={<NotFound />} />

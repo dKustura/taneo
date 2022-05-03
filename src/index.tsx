@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 
+import ErrorBoundary from 'components/ErrorBoundary';
 import { ThemeModeProvider } from 'hooks/useThemeMode';
 
 import App from 'pages/App';
@@ -14,10 +15,12 @@ const root = ReactDOM.createRoot(document.getElementById(ROOT_ELEMENT_ID) as HTM
 // Note to self: StrictMode is intentionally causing double re-render but only in development mode.
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <ThemeModeProvider>
-        <App />
-      </ThemeModeProvider>
-    </BrowserRouter>
+    <ErrorBoundary>
+      <BrowserRouter>
+        <ThemeModeProvider>
+          <App />
+        </ThemeModeProvider>
+      </BrowserRouter>
+    </ErrorBoundary>
   </React.StrictMode>
 );

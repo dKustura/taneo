@@ -15,7 +15,7 @@ import { MonthlyAverageData } from 'api/models';
 
 import { MONTHS } from 'helpers/constants';
 import { ClimateVariable } from 'helpers/types';
-import { getGCMDisplayName } from 'helpers/dataDisplay';
+import { getDisplayNameForGCM } from 'helpers/dataDisplay';
 import globalStyles from 'globalStyles';
 
 type Props = {
@@ -40,30 +40,21 @@ const SmallScreenTable = ({ data, climateVariable }: Props) => {
                       : colors.blue200,
                   })}
                 >
-                  <TableCell>
+                  <TableCell colSpan={2} align="center">
                     <Typography sx={globalStyles.boldText}>
-                      {getGCMDisplayName(gcmData.gcm)}
+                      {getDisplayNameForGCM(gcmData.gcm)}
                     </Typography>
-                  </TableCell>
-                </TableRow>
-
-                <TableRow>
-                  <TableCell sx={{ width: '50%' }}>
-                    <Typography sx={globalStyles.boldText}>Month</Typography>
-                  </TableCell>
-                  <TableCell>
-                    <Typography sx={globalStyles.boldText}>Value</Typography>
                   </TableCell>
                 </TableRow>
               </TableHead>
 
               <TableBody>
                 {MONTHS.map((month, index) => (
-                  <TableRow key={month}>
-                    <TableCell>
+                  <TableRow key={month} hover>
+                    <TableCell align="center">
                       <Typography sx={globalStyles.boldText}>{month}</Typography>
                     </TableCell>
-                    <TableCell>
+                    <TableCell align="center">
                       <Typography>{gcmData.monthVals[index]}</Typography>
                     </TableCell>
                   </TableRow>
