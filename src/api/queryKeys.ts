@@ -5,7 +5,7 @@ export const getQueryKey = (
   variable: ClimateVariable,
   countryCode: CountryCode,
   startYear: number,
-  endYear: number,
+  endYear: number
 ) => {
   return [{ measure, variable, countryCode, startYear, endYear }] as const;
 };

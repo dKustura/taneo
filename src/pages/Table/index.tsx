@@ -21,7 +21,15 @@ const TableView = ({ filter }: Props) => {
     return <div>Loading...</div>;
   }
 
-  return <div>TableView</div>;
+  return (
+    <div>
+      {data.map((d) => (
+        <div>
+          {d.gcm} - {d.variable} - {d.fromYear}-{d.toYear} - {d.monthVals}
+        </div>
+      ))}
+    </div>
+  );
 };
 
 export default TableView;

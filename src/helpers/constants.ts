@@ -1,7 +1,4 @@
-import {
-  BarChart as BarChartIcon,
-  TableChart as TableChartIcon,
-} from '@mui/icons-material';
+import { BarChart as BarChartIcon, TableChart as TableChartIcon } from '@mui/icons-material';
 
 import { AppRoute, Country, CountryCode, TimePeriod } from './types';
 

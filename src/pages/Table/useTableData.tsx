@@ -5,15 +5,13 @@ import { FilterData } from 'helpers/types';
 import { MonthlyAverageData } from 'api/models';
 
 const useTableData = (filter: FilterData) => {
-  const [customMonthlyData, setCustomMonthlyData] = useState<
-    MonthlyAverageData[]
-  >([]);
+  const [customMonthlyData, setCustomMonthlyData] = useState<MonthlyAverageData[]>([]);
 
   const { data, ...queryResult } = useMonthlyAverageDataQuery(
     filter.climateVariable,
     filter.country.code,
     filter.timePeriod.startYear,
-    filter.timePeriod.endYear,
+    filter.timePeriod.endYear
   );
 
   const addData = useCallback(
@@ -27,11 +25,7 @@ const useTableData = (filter: FilterData) => {
       };
       setCustomMonthlyData((prevData) => [...prevData, newData]);
     },
-    [
-      filter.climateVariable,
-      filter.timePeriod.endYear,
-      filter.timePeriod.startYear,
-    ],
+    [filter.climateVariable, filter.timePeriod.endYear, filter.timePeriod.startYear]
   );
 
   const allMonthlyData = useMemo(() => {

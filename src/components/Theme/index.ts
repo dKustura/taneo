@@ -107,7 +107,7 @@ export const lightTheme = responsiveFontSizes(
       ...commonOverrides,
     },
     ...commonTheme,
-  }),
+  })
 );
 
 export const darkTheme = responsiveFontSizes(
@@ -129,5 +129,5 @@ export const darkTheme = responsiveFontSizes(
       ...commonOverrides,
     },
     ...commonTheme,
-  }),
+  })
 );

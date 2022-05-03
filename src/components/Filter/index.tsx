@@ -1,10 +1,4 @@
-import {
-  Autocomplete,
-  Grid,
-  TextField,
-  ToggleButton,
-  ToggleButtonGroup,
-} from '@mui/material';
+import { Autocomplete, Grid, TextField, ToggleButton, ToggleButtonGroup } from '@mui/material';
 
 import {
   ClimateVariable,
@@ -26,14 +20,12 @@ const Filter = ({ data, onChangeHandlers }: Props) => {
   const onCountryChange = (_: React.SyntheticEvent, country: Country) =>
     onChangeHandlers.onCountryChange(country);
 
-  const onTimePeriodChange = (
-    _: React.SyntheticEvent,
-    timePeriod: TimePeriod,
-  ) => onChangeHandlers.onTimePeriodChange(timePeriod);
+  const onTimePeriodChange = (_: React.SyntheticEvent, timePeriod: TimePeriod) =>
+    onChangeHandlers.onTimePeriodChange(timePeriod);
 
   const onClimateVariableChange = (
     _: React.MouseEvent<HTMLElement>,
-    climateVariable: ClimateVariable,
+    climateVariable: ClimateVariable
   ) => {
     if (!climateVariable) return;
     onChangeHandlers.onClimateVariableChange(climateVariable);

@@ -20,13 +20,7 @@ const UnderlinedLink = ({
   color = 'inherit',
 }: PropsWithChildren<Props>) => {
   return (
-    <Link
-      variant={variant}
-      underline="none"
-      color={color}
-      sx={styles.link}
-      href={to}
-    >
+    <Link variant={variant} underline="none" color={color} sx={styles.link} href={to}>
       {children}
     </Link>
   );

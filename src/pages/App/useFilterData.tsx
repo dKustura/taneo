@@ -1,11 +1,6 @@
 import { useCallback, useState } from 'react';
 
-import {
-  ClimateVariable,
-  Country,
-  FilterData,
-  TimePeriod,
-} from 'helpers/types';
+import { ClimateVariable, Country, FilterData, TimePeriod } from 'helpers/types';
 import { COUNTRIES, TIME_PERIODS } from 'helpers/constants';
 
 const initialData: FilterData = {
@@ -18,15 +13,14 @@ const useFilterData = () => {
   const [filterData, setFilterData] = useState(initialData);
 
   const onCountryChange = useCallback(
-    (newCountry: Country) =>
-      setFilterData((prev) => ({ ...prev, country: newCountry })),
-    [],
+    (newCountry: Country) => setFilterData((prev) => ({ ...prev, country: newCountry })),
+    []
   );
 
   const onTimePeriodChange = useCallback(
     (newTimePeriod: TimePeriod) =>
       setFilterData((prev) => ({ ...prev, timePeriod: newTimePeriod })),
-    [],
+    []
   );
 
   const onClimateVariableChange = useCallback(
@@ -35,7 +29,7 @@ const useFilterData = () => {
         ...prev,
         climateVariable: newClimateVariable,
       })),
-    [],
+    []
   );
 
   return {

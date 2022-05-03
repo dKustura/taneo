@@ -1,13 +1,6 @@
 import { useState } from 'react';
 
-import {
-  IconButton,
-  Link,
-  ListItemIcon,
-  Menu,
-  MenuItem,
-  Typography,
-} from '@mui/material';
+import { IconButton, Link, ListItemIcon, Menu, MenuItem, Typography } from '@mui/material';
 import { Menu as MenuIcon } from '@mui/icons-material';
 
 import { AppRoutes } from 'helpers/constants';

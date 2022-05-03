@@ -11,10 +11,10 @@ const getMonthlyAverageData = async (
   variable: ClimateVariable,
   countryCode: CountryCode,
   startYear: number,
-  endYear: number,
+  endYear: number
 ) => {
   const { data } = await axios.get<MonthlyAverageData[]>(
-    `/${Measure.MonthlyAverage}/${variable}/${startYear}/${endYear}/${countryCode}`,
+    `/${Measure.MonthlyAverage}/${variable}/${startYear}/${endYear}/${countryCode}`
   );
   return data;
 };
@@ -23,10 +23,10 @@ const getAnnualAverageData = async (
   variable: ClimateVariable,
   countryCode: CountryCode,
   startYear: number,
-  endYear: number,
+  endYear: number
 ) => {
   const { data } = await axios.get<AnnualAverageData[]>(
-    `/${Measure.AnnualAverage}/${variable}/${startYear}/${endYear}/${countryCode}`,
+    `/${Measure.AnnualAverage}/${variable}/${startYear}/${endYear}/${countryCode}`
   );
   return data;
 };
@@ -35,18 +35,12 @@ export const useMonthlyAverageDataQuery = (
   variable: ClimateVariable,
   countryCode: CountryCode,
   startYear: number,
-  endYear: number,
+  endYear: number
 ) => {
   return useQuery(
-    getQueryKey(
-      Measure.MonthlyAverage,
-      variable,
-      countryCode,
-      startYear,
-      endYear,
-    ),
+    getQueryKey(Measure.MonthlyAverage, variable, countryCode, startYear, endYear),
     () => getMonthlyAverageData(variable, countryCode, startYear, endYear),
-    QueryOptions.FETCH_ONCE,
+    QueryOptions.FETCH_ONCE
   );
 };
 
@@ -54,17 +48,11 @@ export const useAnnualAverageDataQuery = (
   variable: ClimateVariable,
   countryCode: CountryCode,
   startYear: number,
-  endYear: number,
+  endYear: number
 ) => {
   return useQuery(
-    getQueryKey(
-      Measure.AnnualAverage,
-      variable,
-      countryCode,
-      startYear,
-      endYear,
-    ),
+    getQueryKey(Measure.AnnualAverage, variable, countryCode, startYear, endYear),
     () => getAnnualAverageData(variable, countryCode, startYear, endYear),
-    QueryOptions.FETCH_ONCE,
+    QueryOptions.FETCH_ONCE
   );
 };

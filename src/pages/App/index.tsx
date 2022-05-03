@@ -26,25 +26,21 @@ function App() {
   return (
     <ThemeProvider theme={getTheme(theme)}>
       <QueryClientProvider client={queryClient}>
-        <div>
-          <CssBaseline />
+        <CssBaseline />
 
-          <Header />
-          <Container maxWidth="xl" sx={{ p: 4 }}>
-            <Filter data={filterData} onChangeHandlers={onChangeHandlers} />
+        <Header />
 
-            <Routes>
-              <Route
-                path={RoutePaths.TABLE}
-                element={<Table filter={filterData} />}
-              />
-              <Route path={RoutePaths.CHART} element={<Chart />} />
+        <Container maxWidth="xl" sx={{ p: 4 }}>
+          <Filter data={filterData} onChangeHandlers={onChangeHandlers} />
 
-              <Route path="/" element={<Navigate to={RoutePaths.TABLE} />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </Container>
-        </div>
+          <Routes>
+            <Route path={RoutePaths.TABLE} element={<Table filter={filterData} />} />
+            <Route path={RoutePaths.CHART} element={<Chart />} />
+
+            <Route path="/" element={<Navigate to={RoutePaths.TABLE} />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Container>
         <ToastContainer limit={3} position="bottom-right" />
       </QueryClientProvider>
     </ThemeProvider>

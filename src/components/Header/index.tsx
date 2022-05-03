@@ -1,11 +1,4 @@
-import {
-  AppBar,
-  Box,
-  Container,
-  Grid,
-  Toolbar,
-  Typography,
-} from '@mui/material';
+import { AppBar, Box, Container, Grid, Toolbar, Typography } from '@mui/material';
 
 import { AppRoutes, APP_NAME } from 'helpers/constants';
 import styles from './styles';
@@ -30,9 +23,7 @@ const Header = () => {
               <Grid container spacing={3} alignItems="center">
                 {AppRoutes.map((route) => (
                   <Grid item key={route.title}>
-                    <UnderlinedLink to={route.path}>
-                      {route.title}
-                    </UnderlinedLink>
+                    <UnderlinedLink to={route.path}>{route.title}</UnderlinedLink>
                   </Grid>
                 ))}
               </Grid>

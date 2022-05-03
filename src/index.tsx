@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 import { ThemeModeProvider } from 'hooks/useThemeMode';
 
-import App from 'App';
+import App from 'pages/App';
 import './index.css';
 
 const ROOT_ELEMENT_ID = 'root';

@@ -34,9 +34,7 @@ const useThemeModeState = () => {
   const context = useContext(ThemeModeStateContext);
 
   if (context === undefined) {
-    throw new Error(
-      'useThemeModeState must be used within a ThemeModeProvider',
-    );
+    throw new Error('useThemeModeState must be used within a ThemeModeProvider');
   }
 
   return context;
@@ -46,9 +44,7 @@ const useThemeModeDispatch = () => {
   const context = useContext(ThemeModeDispatchContext);
 
   if (context === undefined) {
-    throw new Error(
-      'useThemeModeDispatch must be used within a ThemeModeProvider',
-    );
+    throw new Error('useThemeModeDispatch must be used within a ThemeModeProvider');
   }
 
   return context;
