@@ -31,7 +31,6 @@ const ChartView = ({ filter }: Props) => {
   const getColor = isTemperatureVariable ? getTemperatureColor : getPrecipitationColor;
   const { min, max } = getMinMax(data.map((d) => d.value));
 
-  console.log('rendder');
   return (
     <>
       <Grid container justifyContent="center">
@@ -48,7 +47,10 @@ const ChartView = ({ filter }: Props) => {
                 angle={isSmallScreen ? -50 : -30}
               />
               <YAxis />
-              <Tooltip cursor={{ fill: theme.palette.primary.light, opacity: 0.2 }} />
+              <Tooltip
+                cursor={{ fill: theme.palette.primary.light, opacity: 0.2 }}
+                formatter={(value: number) => value.toFixed(2)}
+              />
               <Bar dataKey="value">
                 {data.map((entry, index) => (
                   <Cell key={`cell-${index}`} fill={getColor(min, max, entry.value)} />

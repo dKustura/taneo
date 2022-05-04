@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useQueries, useQuery } from 'react-query';
+import { useQueries } from 'react-query';
 import { getQueryKey } from './queryKeys';
 import { AnnualAverageData, MonthlyAverageData } from './models';
 import { ClimateVariable, Country, CountryCode, Measure } from 'helpers/types';
@@ -35,15 +35,21 @@ const getAnnualAverageData = async (
 
 export const useMonthlyAverageDataQuery = (
   variable: ClimateVariable,
-  countryCode: CountryCode,
+  country: Country,
   startYear: number,
   endYear: number
 ) => {
-  return useQuery(
-    getQueryKey(Measure.MonthlyAverage, variable, countryCode, startYear, endYear),
-    () => getMonthlyAverageData(variable, countryCode, startYear, endYear),
-    DefaultQueryOptions
-  );
+  const countryCodes = getCountryCodesForQueries(country);
+
+  const queries = countryCodes.map((countryCode) => {
+    return {
+      queryKey: getQueryKey(Measure.MonthlyAverage, variable, countryCode, startYear, endYear),
+      queryFn: () => getMonthlyAverageData(variable, countryCode, startYear, endYear),
+      ...DefaultQueryOptions,
+    };
+  });
+
+  return useQueriesMemo(useQueries(queries));
 };
 
 export const useAnnualAverageDataQuery = (
@@ -52,19 +58,17 @@ export const useAnnualAverageDataQuery = (
   startYear: number,
   endYear: number
 ) => {
-  const queries = useQueriesMemo(
-    useQueries(
-      getCountryCodesForQueries(country).map((countryCode) => {
-        return {
-          queryKey: getQueryKey(Measure.AnnualAverage, variable, countryCode, startYear, endYear),
-          queryFn: () => getAnnualAverageData(variable, countryCode, startYear, endYear),
-          ...DefaultQueryOptions,
-        };
-      })
-    )
-  );
+  const countryCodes = getCountryCodesForQueries(country);
 
-  return queries;
+  const queries = countryCodes.map((countryCode) => {
+    return {
+      queryKey: getQueryKey(Measure.AnnualAverage, variable, countryCode, startYear, endYear),
+      queryFn: () => getAnnualAverageData(variable, countryCode, startYear, endYear),
+      ...DefaultQueryOptions,
+    };
+  });
+
+  return useQueriesMemo(useQueries(queries));
 };
 
 const getCountryCodesForQueries = (country: Country) => {

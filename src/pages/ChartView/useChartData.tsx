@@ -1,8 +1,8 @@
 import { useCallback, useMemo, useState } from 'react';
 import { useAnnualAverageDataQuery } from 'api/climate';
+import { AnnualAverageData } from 'api/models';
 
 import { FilterData } from 'helpers/types';
-import { AnnualAverageData } from 'api/models';
 import { getDisplayNameForGCM } from 'helpers/dataDisplay';
 import { mergeAnnualAverageQueryResults } from 'helpers/dataMerge';
 

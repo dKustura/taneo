@@ -55,7 +55,7 @@ const SmallScreenTable = ({ data, climateVariable }: Props) => {
                       <Typography sx={globalStyles.boldText}>{month}</Typography>
                     </TableCell>
                     <TableCell align="center">
-                      <Typography>{gcmData.monthVals[index]}</Typography>
+                      <Typography>{gcmData.monthVals[index].toFixed(2)}</Typography>
                     </TableCell>
                   </TableRow>
                 ))}

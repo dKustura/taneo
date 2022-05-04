@@ -57,7 +57,7 @@ const BigScreenTable = ({ data, climateVariable }: Props) => {
               </TableCell>
 
               {gcmData.monthVals.map((monthValue, index) => (
-                <TableCell key={`${MONTHS[index]}-value`}>{monthValue}</TableCell>
+                <TableCell key={`${MONTHS[index]}-value`}>{monthValue.toFixed(2)}</TableCell>
               ))}
             </TableRow>
           ))}
