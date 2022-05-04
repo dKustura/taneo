@@ -1,9 +1,5 @@
-import { ClimateVariable } from 'helpers/types';
+import { GcmData } from './GcmData';
 
-export interface MonthlyAverageData {
-  readonly gcm: string;
-  readonly variable: ClimateVariable;
-  readonly fromYear: number;
-  readonly toYear: number;
+export interface MonthlyAverageData extends GcmData {
   readonly monthVals: number[];
 }

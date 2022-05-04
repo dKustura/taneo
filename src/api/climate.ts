@@ -1,9 +1,11 @@
 import axios from 'axios';
-import { useQuery } from 'react-query';
+import { useQueries, useQuery } from 'react-query';
 import { getQueryKey } from './queryKeys';
 import { AnnualAverageData, MonthlyAverageData } from './models';
-import { ClimateVariable, CountryCode, Measure } from 'helpers/types';
+import { ClimateVariable, Country, CountryCode, Measure } from 'helpers/types';
 import { DefaultQueryOptions } from './queryOptions';
+import { isCountryUnion } from 'helpers/typeGuards';
+import { useQueriesMemo } from 'hooks/useQueriesMemo';
 
 axios.defaults.baseURL = 'https://taneo-climate-api.herokuapp.com/v1/country';
 
@@ -46,13 +48,26 @@ export const useMonthlyAverageDataQuery = (
 
 export const useAnnualAverageDataQuery = (
   variable: ClimateVariable,
-  countryCode: CountryCode,
+  country: Country,
   startYear: number,
   endYear: number
 ) => {
-  return useQuery(
-    getQueryKey(Measure.AnnualAverage, variable, countryCode, startYear, endYear),
-    () => getAnnualAverageData(variable, countryCode, startYear, endYear),
-    DefaultQueryOptions
+  const queries = useQueriesMemo(
+    useQueries(
+      getCountryCodesForQueries(country).map((countryCode) => {
+        return {
+          queryKey: getQueryKey(Measure.AnnualAverage, variable, countryCode, startYear, endYear),
+          queryFn: () => getAnnualAverageData(variable, countryCode, startYear, endYear),
+          ...DefaultQueryOptions,
+        };
+      })
+    )
   );
+
+  return queries;
+};
+
+const getCountryCodesForQueries = (country: Country) => {
+  if (isCountryUnion(country)) return country.memberCountries;
+  return [country.code];
 };

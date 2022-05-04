@@ -1,5 +1,5 @@
 import { Grid, useTheme } from '@mui/material';
-import { Bar, BarChart, CartesianGrid, Tooltip, XAxis, YAxis } from 'recharts';
+import { Bar, BarChart, CartesianGrid, Cell, Tooltip, XAxis, YAxis } from 'recharts';
 import ResponsiveContainer from 'components/ResponsiveContainer';
 import LoadingIndicator from 'components/LoadingIndicator';
 import ErrorMessage from 'components/ErrorMessage';
@@ -7,7 +7,8 @@ import ErrorMessage from 'components/ErrorMessage';
 import useChartData from './useChartData';
 import { useIsScreenSizeDown } from 'hooks/useScreenSize';
 
-import { FilterData } from 'helpers/types';
+import { ClimateVariable, FilterData } from 'helpers/types';
+import { getMinMax, getPrecipitationColor, getTemperatureColor } from 'helpers/dataDisplay';
 
 type Props = {
   readonly filter: FilterData;
@@ -26,6 +27,11 @@ const ChartView = ({ filter }: Props) => {
     return <ErrorMessage />;
   }
 
+  const isTemperatureVariable = filter.climateVariable === ClimateVariable.Temperature;
+  const getColor = isTemperatureVariable ? getTemperatureColor : getPrecipitationColor;
+  const { min, max } = getMinMax(data.map((d) => d.value));
+
+  console.log('rendder');
   return (
     <>
       <Grid container justifyContent="center">
@@ -43,7 +49,11 @@ const ChartView = ({ filter }: Props) => {
               />
               <YAxis />
               <Tooltip cursor={{ fill: theme.palette.primary.light, opacity: 0.2 }} />
-              <Bar dataKey="value" fill={theme.palette.primary.main} />
+              <Bar dataKey="value">
+                {data.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={getColor(min, max, entry.value)} />
+                ))}
+              </Bar>
             </BarChart>
           </ResponsiveContainer>
         </Grid>

@@ -99,7 +99,7 @@ export const lightTheme = responsiveFontSizes(
         main: colors.blue400,
       },
       secondary: {
-        main: '#ffd740',
+        main: '#ff9800',
       },
       ...commonPalette,
     },
