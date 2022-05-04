@@ -5,12 +5,10 @@ const colors = {
   info: '#274C68',
   black: '#000000',
   white: '#FFFFFF',
-
-  blue200: '#81d4fa',
-  blue400: '#29b6f6',
-  teal400: '#26a69a',
-  teal500: '#009688',
-  orange900: '#ffbf00',
+  blue: '#40b6e9',
+  orange: '#ff9800',
+  teal: '#80cbc4',
+  yellow: '#e8c143',
 };
 
 const temperatureColorRange: string[] = ['#ffbf00', '#ff6900'];

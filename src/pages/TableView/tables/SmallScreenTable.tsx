@@ -10,13 +10,14 @@ import {
   Typography,
 } from '@mui/material';
 
-import colors from 'components/Theme/colors';
 import { MonthlyAverageData } from 'api/models';
 
 import { MONTHS } from 'helpers/constants';
 import { ClimateVariable } from 'helpers/types';
 import { getDisplayNameForGCM } from 'helpers/dataDisplay';
+
 import globalStyles from 'globalStyles';
+import styles from './styles';
 
 type Props = {
   readonly data: MonthlyAverageData[];
@@ -37,10 +38,10 @@ const SmallScreenTable = ({ data, climateVariable }: Props) => {
                   sx={(theme) => ({
                     backgroundColor: isTemperatureVariable
                       ? theme.palette.secondary.main
-                      : colors.blue200,
+                      : theme.palette.primary.main,
                   })}
                 >
-                  <TableCell colSpan={2} align="center">
+                  <TableCell colSpan={2} align="center" sx={styles.smallHeaderCell}>
                     <Typography sx={globalStyles.boldText}>
                       {getDisplayNameForGCM(gcmData.gcm)}
                     </Typography>

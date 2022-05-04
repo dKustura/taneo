@@ -96,10 +96,10 @@ export const lightTheme = responsiveFontSizes(
         default: colors.white,
       },
       primary: {
-        main: colors.blue400,
+        main: colors.blue,
       },
       secondary: {
-        main: '#ff9800',
+        main: colors.orange,
       },
       ...commonPalette,
     },
@@ -118,10 +118,10 @@ export const darkTheme = responsiveFontSizes(
         default: '#212121',
       },
       primary: {
-        main: '#80cbc4',
+        main: colors.teal,
       },
       secondary: {
-        main: colors.teal500,
+        main: colors.yellow,
       },
       ...commonPalette,
     },

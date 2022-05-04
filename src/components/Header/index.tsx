@@ -4,6 +4,7 @@ import { AppRoutes, APP_NAME } from 'helpers/constants';
 import styles from './styles';
 import UnderlinedLink from 'components/UnderlinedLink';
 import HamburgerMenu from './HamburgerMenu';
+import ThemeToggle from 'components/ThemeToggle';
 
 const Header = () => {
   return (
@@ -28,6 +29,8 @@ const Header = () => {
                 ))}
               </Grid>
             </Box>
+
+            <ThemeToggle />
           </Toolbar>
         </Container>
       </AppBar>
