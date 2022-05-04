@@ -3,7 +3,7 @@ import { colorRanges } from 'components/Theme/colors';
 import { GCM_DISPLAY_NAMES } from './constants';
 
 export const getDisplayNameForGCM = (gcm: string) => {
-  return GCM_DISPLAY_NAMES[gcm] || 'N/A';
+  return GCM_DISPLAY_NAMES[gcm] || gcm;
 };
 
 export const getTemperatureColor = (min: number, max: number, value: number) => {

@@ -1,5 +1,8 @@
-import { Grid, useTheme } from '@mui/material';
+import { useState } from 'react';
+import { Button, Grid, useTheme } from '@mui/material';
+import { AddCircle as AddCircleIcon } from '@mui/icons-material';
 import { Bar, BarChart, CartesianGrid, Cell, Tooltip, XAxis, YAxis } from 'recharts';
+
 import ResponsiveContainer from 'components/ResponsiveContainer';
 import LoadingIndicator from 'components/LoadingIndicator';
 import ErrorMessage from 'components/ErrorMessage';
@@ -9,6 +12,7 @@ import { useIsScreenSizeDown } from 'hooks/useScreenSize';
 
 import { ClimateVariable, FilterData } from 'helpers/types';
 import { getMinMax, getPrecipitationColor, getTemperatureColor } from 'helpers/dataDisplay';
+import AnnualDataInputForm from 'components/AnnualDataInputForm';
 
 type Props = {
   readonly filter: FilterData;
@@ -16,6 +20,8 @@ type Props = {
 
 const ChartView = ({ filter }: Props) => {
   const { data, addData, isError, isLoading } = useChartData(filter);
+  const [isAddDataDialogOpen, setIsAddDataDialogOpen] = useState(false);
+
   const theme = useTheme();
   const isSmallScreen = useIsScreenSizeDown('sm');
 
@@ -31,8 +37,34 @@ const ChartView = ({ filter }: Props) => {
   const getColor = isTemperatureVariable ? getTemperatureColor : getPrecipitationColor;
   const { min, max } = getMinMax(data.map((d) => d.value));
 
+  const onAddDataButtonClick = () => {
+    setIsAddDataDialogOpen(true);
+  };
+
+  const onAddDataDialogClose = () => {
+    setIsAddDataDialogOpen(false);
+  };
+
   return (
     <>
+      <Grid container justifyContent="flex-end" sx={{ pt: 2 }}>
+        <Grid item xs={12} sm={2} lg={1}>
+          <Button
+            fullWidth
+            variant="contained"
+            onClick={onAddDataButtonClick}
+            startIcon={<AddCircleIcon />}
+          >
+            Add data
+          </Button>
+        </Grid>
+      </Grid>
+      <AnnualDataInputForm
+        isOpen={isAddDataDialogOpen}
+        onClose={onAddDataDialogClose}
+        onSubmit={addData}
+      />
+
       <Grid container justifyContent="center">
         <Grid item xs={12} md={10} lg={8} sx={{ pt: 8, px: 2, height: '60vh' }}>
           <ResponsiveContainer>
@@ -49,7 +81,7 @@ const ChartView = ({ filter }: Props) => {
               <YAxis />
               <Tooltip
                 cursor={{ fill: theme.palette.primary.light, opacity: 0.2 }}
-                formatter={(value: number) => value.toFixed(2)}
+                formatter={(value: number) => Number(value).toFixed(2)}
               />
               <Bar dataKey="value">
                 {data.map((entry, index) => (

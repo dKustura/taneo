@@ -1,4 +1,5 @@
-import { Autocomplete, Grid, TextField, ToggleButton, ToggleButtonGroup } from '@mui/material';
+import { Autocomplete, Box, Grid, TextField, ToggleButton, ToggleButtonGroup } from '@mui/material';
+import { Thermostat as ThermostatIcon, Opacity as OpacityIcon } from '@mui/icons-material';
 
 import {
   ClimateVariable,
@@ -8,6 +9,7 @@ import {
   TimePeriod,
 } from 'helpers/types';
 import { COUNTRIES, TIME_PERIODS } from 'helpers/constants';
+import styles from './styles';
 
 type Props = {
   readonly data: FilterData;
@@ -35,41 +37,49 @@ const Filter = ({ data, onChangeHandlers }: Props) => {
     `${timePeriod.startYear}-${timePeriod.endYear}`;
 
   return (
-    <Grid container spacing={2} alignItems="center">
-      <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
-        <Autocomplete
-          value={country}
-          getOptionLabel={(country) => country.name}
-          disableClearable
-          onChange={onCountryChange}
-          options={COUNTRIES}
-          renderInput={(params) => <TextField {...params} label="Country" />}
-        />
-      </Grid>
+    <Grid container alignItems="center" justifyContent="space-between">
+      <Box display="flex" flexGrow={1}>
+        <Grid container spacing={2} alignItems="center">
+          <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
+            <Autocomplete
+              value={country}
+              getOptionLabel={(country) => country.name}
+              disableClearable
+              onChange={onCountryChange}
+              options={COUNTRIES}
+              renderInput={(params) => <TextField {...params} label="Country" />}
+            />
+          </Grid>
 
-      <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
-        <Autocomplete
-          value={timePeriod}
-          getOptionLabel={getTimePeriodLabel}
-          disableClearable
-          onChange={onTimePeriodChange}
-          options={TIME_PERIODS}
-          renderInput={(params) => <TextField {...params} label="Period" />}
-        />
-      </Grid>
+          <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
+            <Autocomplete
+              value={timePeriod}
+              getOptionLabel={getTimePeriodLabel}
+              disableClearable
+              onChange={onTimePeriodChange}
+              options={TIME_PERIODS}
+              renderInput={(params) => <TextField {...params} label="Period" />}
+            />
+          </Grid>
+        </Grid>
+      </Box>
 
-      <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
+      <Grid item xs={12} sm={5} md={3} xl={2} sx={styles.variableButton}>
         <ToggleButtonGroup
+          fullWidth
           color="primary"
           value={climateVariable}
           exclusive
           onChange={onClimateVariableChange}
         >
-          {Object.entries(ClimateVariable).map(([name, value]) => (
-            <ToggleButton key={value} value={value}>
-              {name}
-            </ToggleButton>
-          ))}
+          <ToggleButton color="secondary" value={ClimateVariable.Temperature}>
+            Temperature
+            <ThermostatIcon />
+          </ToggleButton>
+          <ToggleButton color="primary" value={ClimateVariable.Precipitation}>
+            Precipitation
+            <OpacityIcon />
+          </ToggleButton>
         </ToggleButtonGroup>
       </Grid>
     </Grid>

@@ -2,12 +2,17 @@ import { useCallback, useMemo, useState } from 'react';
 import { useAnnualAverageDataQuery } from 'api/climate';
 import { AnnualAverageData } from 'api/models';
 
-import { FilterData } from 'helpers/types';
+import { ClimateVariable, FilterData } from 'helpers/types';
 import { getDisplayNameForGCM } from 'helpers/dataDisplay';
 import { mergeAnnualAverageQueryResults } from 'helpers/dataMerge';
 
+import { CustomAnnualData } from './types';
+
 const useChartData = (filter: FilterData) => {
-  const [customAnnualData, setCustomAnnualData] = useState<AnnualAverageData[]>([]);
+  const [customAnnualData, setCustomAnnualData] = useState<CustomAnnualData>({
+    [ClimateVariable.Temperature]: [],
+    [ClimateVariable.Precipitation]: [],
+  });
 
   const queryResults = useAnnualAverageDataQuery(
     filter.climateVariable,
@@ -25,7 +30,10 @@ const useChartData = (filter: FilterData) => {
         fromYear: filter.timePeriod.startYear,
         toYear: filter.timePeriod.endYear,
       };
-      setCustomAnnualData((prevData) => [...prevData, newData]);
+      setCustomAnnualData((prevData) => ({
+        ...prevData,
+        [filter.climateVariable]: [...prevData[filter.climateVariable], newData],
+      }));
     },
     [filter.climateVariable, filter.timePeriod.endYear, filter.timePeriod.startYear]
   );
@@ -45,16 +53,16 @@ const useChartData = (filter: FilterData) => {
 
   // All data formatted for charting
   const formattedChartData = useMemo(() => {
-    let allAnnualData = customAnnualData;
+    let allAnnualData = customAnnualData[filter.climateVariable];
     if (mergedQueryData) {
-      allAnnualData = [...mergedQueryData, ...customAnnualData];
+      allAnnualData = [...mergedQueryData, ...customAnnualData[filter.climateVariable]];
     }
 
     return allAnnualData.map((d) => ({
       key: getDisplayNameForGCM(d.gcm),
       value: d.annualData[0],
     }));
-  }, [mergedQueryData, customAnnualData]);
+  }, [customAnnualData, mergedQueryData, filter.climateVariable]);
 
   return { data: formattedChartData, addData, isLoading, isError };
 };
