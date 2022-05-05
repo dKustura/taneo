@@ -1,4 +1,4 @@
-import { useFormik } from 'formik';
+import { Form, useFormik } from 'formik';
 import {
   Button,
   Dialog,
@@ -26,7 +26,6 @@ const AnnualDataInputForm = ({ isOpen, onClose, onSubmit }: Props) => {
       onSubmit(values.gcmName, values.annualAverage);
       handleClose();
     },
-    enableReinitialize: true,
   });
 
   const handleClose = () => {
@@ -36,7 +35,7 @@ const AnnualDataInputForm = ({ isOpen, onClose, onSubmit }: Props) => {
 
   return (
     <Dialog open={isOpen} onClose={handleClose} maxWidth="xs">
-      <form onSubmit={formik.handleSubmit}>
+      <Form>
         <DialogTitle>Add new entry</DialogTitle>
         <DialogContent>
           <Grid container spacing={2} sx={{ p: 2 }}>
@@ -45,7 +44,6 @@ const AnnualDataInputForm = ({ isOpen, onClose, onSubmit }: Props) => {
                 id="name"
                 name="gcmName"
                 variant="outlined"
-                margin="dense"
                 label="GCM Name"
                 fullWidth
                 onChange={formik.handleChange}
@@ -83,7 +81,7 @@ const AnnualDataInputForm = ({ isOpen, onClose, onSubmit }: Props) => {
             Submit
           </Button>
         </DialogActions>
-      </form>
+      </Form>
     </Dialog>
   );
 };

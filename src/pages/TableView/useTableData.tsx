@@ -1,12 +1,13 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useMemo } from 'react';
 import { useMonthlyAverageDataQuery } from 'api/climate';
 import { MonthlyAverageData } from 'api/models';
 
+import useCustomData from 'hooks/useCustomData';
 import { FilterData } from 'helpers/types';
 import { mergeMonthlyAverageQueryResults } from 'helpers/dataMerge';
 
 const useTableData = (filter: FilterData) => {
-  const [customMonthlyData, setCustomMonthlyData] = useState<MonthlyAverageData[]>([]);
+  const { customData, customDataKey, addNewCustomData } = useCustomData<MonthlyAverageData>(filter);
 
   const queryResults = useMonthlyAverageDataQuery(
     filter.climateVariable,
@@ -24,9 +25,15 @@ const useTableData = (filter: FilterData) => {
         fromYear: filter.timePeriod.startYear,
         toYear: filter.timePeriod.endYear,
       };
-      setCustomMonthlyData((prevData) => [...prevData, newData]);
+
+      addNewCustomData(newData);
     },
-    [filter.climateVariable, filter.timePeriod.endYear, filter.timePeriod.startYear]
+    [
+      addNewCustomData,
+      filter.climateVariable,
+      filter.timePeriod.endYear,
+      filter.timePeriod.startYear,
+    ]
   );
 
   // If at least one query is loading then the data is loading. The same goes for errors.
@@ -42,13 +49,10 @@ const useTableData = (filter: FilterData) => {
     return mergeMonthlyAverageQueryResults(queryResults);
   }, [isError, isLoading, queryResults]);
 
-  const allMonthlyData = useMemo(() => {
-    if (mergedQueryData) {
-      return [...mergedQueryData, ...customMonthlyData];
-    } else {
-      return customMonthlyData;
-    }
-  }, [mergedQueryData, customMonthlyData]);
+  const allMonthlyData = useMemo(
+    () => [...(mergedQueryData ?? []), ...(customData[customDataKey] ?? [])],
+    [customData, customDataKey, mergedQueryData]
+  );
 
   return { data: allMonthlyData, addData, isLoading, isError };
 };

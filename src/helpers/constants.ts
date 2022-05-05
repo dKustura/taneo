@@ -107,3 +107,5 @@ export const GCM_DISPLAY_NAMES: { [gcm: string]: string } = {
   'mri-cgcm3': 'MRI-CGCM3',
   'noresm1-m': 'NORESM1-M',
 };
+
+export const MAX_GCM_NAME_LENGTH = 12;

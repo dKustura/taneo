@@ -1,18 +1,14 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useMemo } from 'react';
 import { useAnnualAverageDataQuery } from 'api/climate';
 import { AnnualAverageData } from 'api/models';
 
-import { ClimateVariable, FilterData } from 'helpers/types';
+import useCustomData from 'hooks/useCustomData';
+import { FilterData } from 'helpers/types';
 import { getDisplayNameForGCM } from 'helpers/dataDisplay';
 import { mergeAnnualAverageQueryResults } from 'helpers/dataMerge';
 
-import { CustomAnnualData } from './types';
-
 const useChartData = (filter: FilterData) => {
-  const [customAnnualData, setCustomAnnualData] = useState<CustomAnnualData>({
-    [ClimateVariable.Temperature]: [],
-    [ClimateVariable.Precipitation]: [],
-  });
+  const { customData, customDataKey, addNewCustomData } = useCustomData<AnnualAverageData>(filter);
 
   const queryResults = useAnnualAverageDataQuery(
     filter.climateVariable,
@@ -30,12 +26,15 @@ const useChartData = (filter: FilterData) => {
         fromYear: filter.timePeriod.startYear,
         toYear: filter.timePeriod.endYear,
       };
-      setCustomAnnualData((prevData) => ({
-        ...prevData,
-        [filter.climateVariable]: [...prevData[filter.climateVariable], newData],
-      }));
+
+      addNewCustomData(newData);
     },
-    [filter.climateVariable, filter.timePeriod.endYear, filter.timePeriod.startYear]
+    [
+      addNewCustomData,
+      filter.climateVariable,
+      filter.timePeriod.endYear,
+      filter.timePeriod.startYear,
+    ]
   );
 
   // If at least one query is loading then the data is loading. The same goes for errors.
@@ -53,16 +52,13 @@ const useChartData = (filter: FilterData) => {
 
   // All data formatted for charting
   const formattedChartData = useMemo(() => {
-    let allAnnualData = customAnnualData[filter.climateVariable];
-    if (mergedQueryData) {
-      allAnnualData = [...mergedQueryData, ...customAnnualData[filter.climateVariable]];
-    }
+    const allAnnualData = [...(mergedQueryData ?? []), ...(customData[customDataKey] ?? [])];
 
     return allAnnualData.map((d) => ({
       key: getDisplayNameForGCM(d.gcm),
       value: d.annualData[0],
     }));
-  }, [customAnnualData, mergedQueryData, filter.climateVariable]);
+  }, [customData, customDataKey, mergedQueryData]);
 
   return { data: formattedChartData, addData, isLoading, isError };
 };

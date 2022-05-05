@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import axios from 'axios';
 import { useQueries } from 'react-query';
 import { getQueryKey } from './queryKeys';
@@ -39,15 +40,16 @@ export const useMonthlyAverageDataQuery = (
   startYear: number,
   endYear: number
 ) => {
-  const countryCodes = getCountryCodesForQueries(country);
-
-  const queries = countryCodes.map((countryCode) => {
-    return {
-      queryKey: getQueryKey(Measure.MonthlyAverage, variable, countryCode, startYear, endYear),
-      queryFn: () => getMonthlyAverageData(variable, countryCode, startYear, endYear),
-      ...DefaultQueryOptions,
-    };
-  });
+  const queries = useMemo(() => {
+    const countryCodes = getCountryCodesForQueries(country);
+    return countryCodes.map((countryCode) => {
+      return {
+        queryKey: getQueryKey(Measure.MonthlyAverage, variable, countryCode, startYear, endYear),
+        queryFn: () => getMonthlyAverageData(variable, countryCode, startYear, endYear),
+        ...DefaultQueryOptions,
+      };
+    });
+  }, [country, endYear, startYear, variable]);
 
   return useQueriesMemo(useQueries(queries));
 };
@@ -58,15 +60,16 @@ export const useAnnualAverageDataQuery = (
   startYear: number,
   endYear: number
 ) => {
-  const countryCodes = getCountryCodesForQueries(country);
-
-  const queries = countryCodes.map((countryCode) => {
-    return {
-      queryKey: getQueryKey(Measure.AnnualAverage, variable, countryCode, startYear, endYear),
-      queryFn: () => getAnnualAverageData(variable, countryCode, startYear, endYear),
-      ...DefaultQueryOptions,
-    };
-  });
+  const queries = useMemo(() => {
+    const countryCodes = getCountryCodesForQueries(country);
+    return countryCodes.map((countryCode) => {
+      return {
+        queryKey: getQueryKey(Measure.AnnualAverage, variable, countryCode, startYear, endYear),
+        queryFn: () => getAnnualAverageData(variable, countryCode, startYear, endYear),
+        ...DefaultQueryOptions,
+      };
+    });
+  }, [country, endYear, startYear, variable]);
 
   return useQueriesMemo(useQueries(queries));
 };

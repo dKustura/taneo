@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import { Button, Grid, useTheme } from '@mui/material';
-import { AddCircle as AddCircleIcon } from '@mui/icons-material';
+import { Grid, useTheme } from '@mui/material';
 import { Bar, BarChart, CartesianGrid, Cell, Tooltip, XAxis, YAxis } from 'recharts';
 
 import ResponsiveContainer from 'components/ResponsiveContainer';
 import LoadingIndicator from 'components/LoadingIndicator';
 import ErrorMessage from 'components/ErrorMessage';
+import NewEntryButton from 'components/NewEntryButton';
 
 import useChartData from './useChartData';
 import { useIsScreenSizeDown } from 'hooks/useScreenSize';
@@ -25,14 +25,6 @@ const ChartView = ({ filter }: Props) => {
   const theme = useTheme();
   const isSmallScreen = useIsScreenSizeDown('sm');
 
-  if (isLoading) {
-    return <LoadingIndicator />;
-  }
-
-  if (isError) {
-    return <ErrorMessage />;
-  }
-
   const isTemperatureVariable = filter.climateVariable === ClimateVariable.Temperature;
   const getColor = isTemperatureVariable ? getTemperatureColor : getPrecipitationColor;
   const { min, max } = getMinMax(data.map((d) => d.value));
@@ -45,18 +37,19 @@ const ChartView = ({ filter }: Props) => {
     setIsAddDataDialogOpen(false);
   };
 
+  if (isLoading) {
+    return <LoadingIndicator />;
+  }
+
+  if (isError) {
+    return <ErrorMessage />;
+  }
+
   return (
     <>
       <Grid container justifyContent="flex-end" sx={{ pt: 2 }}>
         <Grid item xs={12} sm={2} lg={1}>
-          <Button
-            fullWidth
-            variant="contained"
-            onClick={onAddDataButtonClick}
-            startIcon={<AddCircleIcon />}
-          >
-            Add data
-          </Button>
+          <NewEntryButton onClick={onAddDataButtonClick} />
         </Grid>
       </Grid>
       <AnnualDataInputForm
