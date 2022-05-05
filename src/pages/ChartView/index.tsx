@@ -48,7 +48,7 @@ const ChartView = ({ filter }: Props) => {
   return (
     <>
       <Grid container justifyContent="flex-end" sx={{ pt: 2 }}>
-        <Grid item xs={12} sm={2} lg={1}>
+        <Grid item xs={12} sm={3} md={2} xl={1}>
           <NewEntryButton onClick={onAddDataButtonClick} />
         </Grid>
       </Grid>
