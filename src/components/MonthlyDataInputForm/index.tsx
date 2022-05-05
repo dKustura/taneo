@@ -31,7 +31,7 @@ const AnnualDataInputForm = ({ isOpen, onClose, onSubmit }: Props) => {
         helpers.resetForm();
       }}
     >
-      {({ values, resetForm }) => {
+      {({ resetForm }) => {
         const handleClose = () => {
           onClose();
           resetForm();
@@ -63,35 +63,31 @@ const AnnualDataInputForm = ({ isOpen, onClose, onSubmit }: Props) => {
                   </Grid>
                   <FieldArray
                     name="monthValues"
-                    render={() => (
-                      <>
-                        {values.monthValues &&
-                          values.monthValues.length > 0 &&
-                          MONTHS.map((monthName, index) => (
-                            <Grid key={`month-${monthName}`} item xs={12} sm={4}>
-                              <FastField name={`monthValues.${index}`}>
-                                {({
-                                  field,
-                                  meta: { touched, error },
-                                }: FieldProps<MonthlyDataSchemaType>) => (
-                                  <TextField
-                                    id="value"
-                                    name={field.name}
-                                    variant="outlined"
-                                    label={monthName}
-                                    fullWidth
-                                    onChange={field.onChange}
-                                    onBlur={field.onBlur}
-                                    value={field.value}
-                                    error={touched && Boolean(error)}
-                                    helperText={touched && error ? error : ' '}
-                                  />
-                                )}
-                              </FastField>
-                            </Grid>
-                          ))}
-                      </>
-                    )}
+                    render={() =>
+                      MONTHS.map((monthName, index) => (
+                        <Grid key={`month-${monthName}`} item xs={12} sm={4}>
+                          <FastField name={`monthValues.${index}`}>
+                            {({
+                              field,
+                              meta: { touched, error },
+                            }: FieldProps<MonthlyDataSchemaType>) => (
+                              <TextField
+                                id="value"
+                                name={field.name}
+                                variant="outlined"
+                                label={monthName}
+                                fullWidth
+                                onChange={field.onChange}
+                                onBlur={field.onBlur}
+                                value={field.value}
+                                error={touched && Boolean(error)}
+                                helperText={touched && error ? error : ' '}
+                              />
+                            )}
+                          </FastField>
+                        </Grid>
+                      ))
+                    }
                   />
                 </Grid>
               </DialogContent>

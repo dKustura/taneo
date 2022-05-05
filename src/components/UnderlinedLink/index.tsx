@@ -3,6 +3,7 @@ import { Link, TypographyProps } from '@mui/material';
 
 import { Variant } from '@mui/material/styles/createTypography';
 import styles from './styles';
+import { useLocation } from 'react-router-dom';
 
 type ColorType = TypographyProps['color'];
 
@@ -19,8 +20,12 @@ const UnderlinedLink = ({
   variant = 'h6',
   color = 'inherit',
 }: PropsWithChildren<Props>) => {
+  const location = useLocation();
+  const isActive = location.pathname === to;
+  const style = isActive ? styles.linkActive : styles.link;
+
   return (
-    <Link variant={variant} underline="none" color={color} sx={styles.link} href={to}>
+    <Link variant={variant} underline="none" color={color} sx={style} href={to}>
       {children}
     </Link>
   );

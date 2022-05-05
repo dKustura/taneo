@@ -1,10 +1,11 @@
 import { AppBar, Box, Container, Grid, Toolbar, Typography } from '@mui/material';
 
+import UnderlinedLink from 'components/UnderlinedLink';
+import ThemeToggle from 'components/ThemeToggle';
+import HamburgerMenu from './HamburgerMenu';
+
 import { AppRoutes, APP_NAME } from 'helpers/constants';
 import styles from './styles';
-import UnderlinedLink from 'components/UnderlinedLink';
-import HamburgerMenu from './HamburgerMenu';
-import ThemeToggle from 'components/ThemeToggle';
 
 const Header = () => {
   return (
