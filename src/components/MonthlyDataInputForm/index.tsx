@@ -1,4 +1,4 @@
-import { Field, FieldArray, FieldProps, Form, Formik } from 'formik';
+import { FastField, FieldArray, FieldProps, Form, Formik } from 'formik';
 import {
   Button,
   Dialog,
@@ -44,7 +44,7 @@ const AnnualDataInputForm = ({ isOpen, onClose, onSubmit }: Props) => {
               <DialogContent>
                 <Grid container spacing={2} sx={{ p: 2 }}>
                   <Grid item xs={12}>
-                    <Field name="gcmName">
+                    <FastField name="gcmName">
                       {({ field, meta: { touched, error } }: FieldProps<MonthlyDataSchemaType>) => (
                         <TextField
                           id="value"
@@ -59,7 +59,7 @@ const AnnualDataInputForm = ({ isOpen, onClose, onSubmit }: Props) => {
                           helperText={touched && error ? error : ' '}
                         />
                       )}
-                    </Field>
+                    </FastField>
                   </Grid>
                   <FieldArray
                     name="monthValues"
@@ -69,7 +69,7 @@ const AnnualDataInputForm = ({ isOpen, onClose, onSubmit }: Props) => {
                           values.monthValues.length > 0 &&
                           MONTHS.map((monthName, index) => (
                             <Grid key={`month-${monthName}`} item xs={12} sm={4}>
-                              <Field name={`monthValues.${index}`}>
+                              <FastField name={`monthValues.${index}`}>
                                 {({
                                   field,
                                   meta: { touched, error },
@@ -87,7 +87,7 @@ const AnnualDataInputForm = ({ isOpen, onClose, onSubmit }: Props) => {
                                     helperText={touched && error ? error : ' '}
                                   />
                                 )}
-                              </Field>
+                              </FastField>
                             </Grid>
                           ))}
                       </>

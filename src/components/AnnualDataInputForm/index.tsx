@@ -1,4 +1,4 @@
-import { Form, useFormik } from 'formik';
+import { useFormik } from 'formik';
 import {
   Button,
   Dialog,
@@ -35,7 +35,7 @@ const AnnualDataInputForm = ({ isOpen, onClose, onSubmit }: Props) => {
 
   return (
     <Dialog open={isOpen} onClose={handleClose} maxWidth="xs">
-      <Form>
+      <form onSubmit={formik.handleSubmit}>
         <DialogTitle>Add new entry</DialogTitle>
         <DialogContent>
           <Grid container spacing={2} sx={{ p: 2 }}>
@@ -81,7 +81,7 @@ const AnnualDataInputForm = ({ isOpen, onClose, onSubmit }: Props) => {
             Submit
           </Button>
         </DialogActions>
-      </Form>
+      </form>
     </Dialog>
   );
 };
