@@ -34,7 +34,7 @@ const Filter = ({ data, onChangeHandlers }: Props) => {
   };
 
   const getTimePeriodLabel = (timePeriod: TimePeriod) =>
-    `${timePeriod.startYear}-${timePeriod.endYear}`;
+    `${timePeriod.startYear} - ${timePeriod.endYear}`;
 
   return (
     <Grid container alignItems="center" justifyContent="space-between">
@@ -47,6 +47,16 @@ const Filter = ({ data, onChangeHandlers }: Props) => {
               disableClearable
               onChange={onCountryChange}
               options={COUNTRIES}
+              renderOption={(props, option) => (
+                <Box component="li" {...props}>
+                  <Grid container alignItems="center">
+                    <Grid item sx={{ width: '2rem', pr: 1 }}>
+                      <option.flagIcon style={{ display: 'block', margin: 'auto' }} />
+                    </Grid>
+                    <Grid item>{option.name}</Grid>
+                  </Grid>
+                </Box>
+              )}
               renderInput={(params) => <TextField {...params} label="Country" />}
             />
           </Grid>

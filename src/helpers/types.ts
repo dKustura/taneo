@@ -1,4 +1,5 @@
 import { SvgIconComponent } from '@mui/icons-material';
+import { FlagComponent } from 'country-flag-icons/react/3x2';
 
 export interface AppRoute {
   readonly title: string;
@@ -37,6 +38,7 @@ export enum CountryCode {
 export interface RegularCountry {
   readonly name: string;
   readonly code: CountryCode;
+  readonly flagIcon: FlagComponent;
 }
 
 export interface CountryUnion extends RegularCountry {

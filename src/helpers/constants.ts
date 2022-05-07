@@ -1,4 +1,5 @@
 import { BarChart as BarChartIcon, TableChart as TableChartIcon } from '@mui/icons-material';
+import { FLAGS } from './flags';
 
 import { AppRoute, Country, CountryCode, TimePeriod } from './types';
 
@@ -45,30 +46,37 @@ export const COUNTRIES: Country[] = [
   {
     name: 'Croatia',
     code: CountryCode.Croatia,
+    flagIcon: FLAGS.Croatia,
   },
   {
     name: 'Slovenia',
     code: CountryCode.Slovenia,
+    flagIcon: FLAGS.Slovenia,
   },
   {
     name: 'Serbia',
     code: CountryCode.Serbia,
+    flagIcon: FLAGS.Serbia,
   },
   {
     name: 'Bosnia & Herzegovina',
     code: CountryCode.BosniaAndHerzegovina,
+    flagIcon: FLAGS.BosniaAndHerzegovina,
   },
   {
     name: 'Montenegro',
     code: CountryCode.Montenegro,
+    flagIcon: FLAGS.Montenegro,
   },
   {
     name: 'Macedonia',
     code: CountryCode.Macedonia,
+    flagIcon: FLAGS.Macedonia,
   },
   {
     name: 'Yugoslavia',
     code: CountryCode.Yugoslavia,
+    flagIcon: FLAGS.Yugoslavia,
     memberCountries: [
       CountryCode.Croatia,
       CountryCode.Slovenia,
