@@ -1,4 +1,4 @@
-import { MonthlyDataSchemaType } from './validation/types';
+import { MonthlyDataSchemaType } from './validation';
 
 export const DEFAULT_FORM_VALUES: MonthlyDataSchemaType = {
   gcmName: '',

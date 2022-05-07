@@ -6,7 +6,6 @@ import ErrorBoundary from 'components/ErrorBoundary';
 import { ThemeModeProvider } from 'hooks/useThemeMode';
 
 import App from 'pages/App';
-import './index.css';
 
 const ROOT_ELEMENT_ID = 'root';
 

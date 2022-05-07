@@ -18,6 +18,9 @@ const commonTheme: ThemeOptions = {
       fontSize: '1.5rem',
       fontWeight: 900,
     },
+    h3: {
+      fontWeight: 900,
+    },
     h6: {
       fontWeight: 700,
     },

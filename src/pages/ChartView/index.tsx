@@ -52,6 +52,7 @@ const ChartView = ({ filter }: Props) => {
           <NewEntryButton onClick={onAddDataButtonClick} />
         </Grid>
       </Grid>
+
       <AnnualDataInputForm
         isOpen={isAddDataDialogOpen}
         onClose={onAddDataDialogClose}

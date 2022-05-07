@@ -50,7 +50,7 @@ const TableView = ({ filter }: Props) => {
         onSubmit={addData}
       />
 
-      <Grid container justifyContent="center" sx={{ pt: 8 }}>
+      <Grid container justifyContent="center" sx={{ pt: 2 }}>
         {isSmallScreen ? (
           <Grid item xs={12}>
             <SmallScreenTable data={data} climateVariable={filter.climateVariable} />

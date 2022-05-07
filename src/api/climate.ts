@@ -42,6 +42,7 @@ export const useMonthlyAverageDataQuery = (
 ) => {
   const queries = useMemo(() => {
     const countryCodes = getCountryCodesForQueries(country);
+
     return countryCodes.map((countryCode) => {
       return {
         queryKey: getQueryKey(Measure.MonthlyAverage, variable, countryCode, startYear, endYear),
@@ -62,6 +63,7 @@ export const useAnnualAverageDataQuery = (
 ) => {
   const queries = useMemo(() => {
     const countryCodes = getCountryCodesForQueries(country);
+
     return countryCodes.map((countryCode) => {
       return {
         queryKey: getQueryKey(Measure.AnnualAverage, variable, countryCode, startYear, endYear),
